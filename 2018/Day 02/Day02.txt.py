@@ -19,3 +19,14 @@ for ID in box_IDs:
 
 print(nb_triples*nb_doubles)
 
+#part 2
+import itertools
+for ID1, ID2 in itertools.combinations(box_IDs, 2):
+    #calculate Hamming distance:
+    if sum(c1 != c2 for c1, c2 in zip(ID1, ID2))==1:
+        print(ID1)
+        print(ID2)
+        break
+
+
+
