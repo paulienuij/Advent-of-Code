@@ -19,7 +19,6 @@ def fuel_mass_2(m):
         return 0
     return mf + fuel_mass_2(mf)
 
-
 print(sum([fuel_mass_2(int(m)) for m in masses]))
 
 
