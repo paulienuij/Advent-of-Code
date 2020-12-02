@@ -13,7 +13,7 @@ layers ={}
 min_zeros = w*h
 index = -1
 
-#part1
+# part1
 for i in range(nblayers):
     layers[i] = img[w*h*i:w*h*(i+1)]
     zeros = layers[i].count("0")
@@ -26,11 +26,10 @@ twos = layers[index].count("2")
 
 print(ones*twos)
 
-#part2
+# part2
 pic = np.full((h, w), 2)
 
 for i in range(nblayers):
-    print(len(layers[i]))
     for x, y in product(range(h), range(w)):
         if pic[x, y] == 2:
             pic[x, y] = layers[i][x*w+y]
