@@ -10,16 +10,17 @@ colors = []
 for rule in rules:
     rule = rule.replace(" bags", "").replace(" bag", "").replace(".", "")
     container, inside = rule.split(" contain ")
-    if "no other bags" in inside:
+    if "no other" in inside:
         continue
-    for bag in inside.split(", "):
-        contained_by[container].append([bag[0], bag[2:]])
-        container_of[bag[2:]].append(container)
+    else:
+        for bag in inside.split(", "):
+            contained_by[container].append([bag[0], bag[2:]])
+            container_of[bag[2:]].append(container)
 
 
+# part 1
 colors = []
 bags_to_check = ["shiny gold"]
-
 
 while len(bags_to_check) > 0:
     bags_to_check, bag = bags_to_check[:-1], bags_to_check[-1]
@@ -30,15 +31,14 @@ while len(bags_to_check) > 0:
 
 print(len(set(colors)))
 
+# part 2
+
 
 def amount_of_bags_for(color):
     amount = 1
     for nb, subcolor in contained_by[color]:
-        if nb == "n":
-            pass
-        else:
-            amount += int(nb) * amount_of_bags_for(subcolor)
+        amount += int(nb) * amount_of_bags_for(subcolor)
     return amount
 
 
-print(amount_of_bags_for("shiny gold") - 1)  # I don't understand why I am off by 1
+print(amount_of_bags_for("shiny gold") - 1)  # I don't understand why I am off by 1, do I not count the shiny gold bag?
