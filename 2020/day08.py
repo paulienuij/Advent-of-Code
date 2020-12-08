@@ -1,8 +1,9 @@
-with open("day08.txt") as file:
-    instructions = file.read().splitlines()
-
 import numpy as np
 from copy import copy
+
+
+with open("day08.txt") as file:
+    instructions = file.read().splitlines()
 
 
 def execute(instruction, acc, i):
@@ -26,31 +27,33 @@ while instruction_processed[i] == 0:
     acc, i = execute(instructions[i], acc, i)
 
 print(acc)
+
 # part 2
 
-def run_with_changes(instructions, j):
-
+for j in range(len(instructions)):
+    instr = copy(instructions)
     typ, nb = instructions[j].split()
+
+    # change instruction j
     if typ == "acc":
         pass
-    elif typ =="nop":
-        instructions[j] = str("jmp " + nb)
+    elif typ == "nop":
+        instr[j] = str("jmp " + nb)
     else:
-        instructions[j] = str("nop " + nb)
+        instr[j] = str("nop " + nb)
 
+    # run the instructions until the index is out of range
     acc, i = 0, 0
     instruction_processed = np.zeros(len(instructions))
-
     try:
         while instruction_processed[i] == 0:
             instruction_processed[i] = 1
-            acc, i = execute(instructions[i], acc, i)
-        return 0
+            acc, i = execute(instr[i], acc, i)
 
     except IndexError:
         print(acc)
-        return 0
 
-for j in range(len(instructions)):
-    run_with_changes(copy(instructions), j)
-    
+
+
+
+
