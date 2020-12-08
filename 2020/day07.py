@@ -1,4 +1,4 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 
 with open("day07.txt") as file:
     rules = file.read().splitlines()
@@ -21,6 +21,7 @@ for rule in rules:
 # part 1
 colors = []
 bags_to_check = ["shiny gold"]
+amount = 0
 
 while len(bags_to_check) > 0:
     bags_to_check, bag = bags_to_check[:-1], bags_to_check[-1]
