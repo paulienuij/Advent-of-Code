@@ -31,7 +31,8 @@ for i in range(len(numbers)):
         try:
             nb = sum(numbers[i:i+j])
         except IndexError:
-            nb = invalidnb+100
+            break
+
         if nb == invalidnb:
             sumrange = numbers[i:i+j]
             print(min(sumrange)+max(sumrange))
