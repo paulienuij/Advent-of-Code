@@ -53,7 +53,3 @@ for j in range(len(instructions)):
     except IndexError:
         print(acc)
 
-
-
-
-
