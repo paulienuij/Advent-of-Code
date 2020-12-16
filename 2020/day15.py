@@ -1,18 +1,23 @@
 from collections import defaultdict
 
-spoken = [6,4,12,1,20,0,16]
+def playgame(input, end):
+    pos_spoken = defaultdict(list)
 
-def play_game(spoken, n):
-    for i in range(len(spoken), n+1):
-        curr = spoken[-1]
+    for i in (range(len(input)-1)):
+        pos_spoken[input[i]].append(i)
+    n = input[-1]
 
-        if curr not in spoken[:-1]:
-            spoken.append(0)
+    for i in range(len(input)-1, end-1):
+        if pos_spoken[n] == []:
+            pos_spoken[n].append(i)
+            n = 0
         else:
-            reversedspoken = spoken[:-1][::-1]  # remove last item and then reverse list
-            prev = reversedspoken.index(curr)  # get index of first occurrence of curr number in reversed list
-            spoken.append(prev+1)
-    return curr
+            prev = pos_spoken[n][-1]
+            pos_spoken[n].append(i)
+            n = i-prev
+    return n
 
-print(play_game(spoken, 2020 ))
-print(play_game(spoken, 30000000))
+input = 6,4,12,1,20,0,16
+print(playgame([6,4,12,1,20,0,16], 2020))
+print(playgame([6,4,12,1,20,0,16], 30000000))
+
